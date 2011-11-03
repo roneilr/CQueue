@@ -1,0 +1,39 @@
+CQueue
+Roneil Rumburg
+
+Overview:
+This is a high-performance implementation of the traditional queue data
+structure in C. It works by using an array of integers to represent the queue,
+and preallocates the queue to the size given by the client.
+
+Usage Details:
+To use this CQueue implementation, simply include the 'cqueue.h' header file in
+your code and link your program to the cqueue.o binary file. The header file
+includes information about the various functions available. To run a set of
+tests to make sure that CQueue compiled correctly, use the included cqueue-test
+program. To run basic tests run cqueue-test with no arguments, and to run a
+performance test run with the argument 'performance'.
+
+Implementation Details:
+The queue works by storing an array of integers (where all the data is held), a
+count of the number of integers currently in the queue, the capacity of the
+queue, and the current position in the queue (starts at 0). As items are added
+to the queue, they fill it from index 0 to capacity, and as items are retrieved
+from the queue the current position is incremented up (instead of actually
+removing the item from the queue). By using this structure, all queue
+operations (create, dispose, count, put, get, and peek) are all O(1)
+operations. However, if a queue is near capacity and has had items removed from
+it, a put operation may need to shift elements in the array back to index 0
+(and reset the current position to 0) to make room for the new element. This
+occurs very rarely though, even when using the queue heavily, so its a
+worthwhile tradeoff to make.
+
+Performance:
+Because the implementation manipulates memory directly, it runs blazingly fast.
+When compiled with no optimizations (O0) and debug information enabled, the
+performance test finishes in about 4.5 seconds on my modest Core 2 Duo machine,
+and that test fully utilizes a 100 million element queue (using around 400
+megabytes of memory), filling and emptying it multiple times. With heavy
+optimization (O2), the test finishes in about 2.75 seconds on my machine. To
+test it for yourself, compile the project and run "time ./cqueue-test
+performance" to see how it runs on your machine.
