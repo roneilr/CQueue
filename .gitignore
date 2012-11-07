@@ -1,0 +1,6 @@
+.DS_Store
+
+# Project files
+Makefile.dependencies
+cqueue-test
+*.o
